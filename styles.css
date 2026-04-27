@@ -1,0 +1,280 @@
+body {
+    font-family: 'Saira Stencil', sans-serif;
+    display: flex;
+
+    flex-direction: column;
+    align-items: center;
+
+    background-image: url('assets/s.webp');
+    background-size: cover;
+    color: blanchedalmond;
+    justify-content: center;
+}
+
+h1 {
+    font-family: 'Saira Stencil', sans-serif;
+    color: blanchedalmond;
+}
+
+/*************************************/
+#board {
+    height: 700px;
+    width: 700px;
+    margin: 0 auto;
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0.48);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), 0 0 18px rgba(60, 140, 255, 0.14);
+}
+
+#boardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+    color: white;
+    font-size: 18px;
+    height: 10%;
+    width: 100%;
+}
+
+
+#game {
+    height: 65%;
+    width: 100%;
+}
+
+#Walls {
+    display: flex;
+    justify-content: space-around;
+    height: 10%;
+    width: 100%;
+}
+
+#btn {
+    height: 15%;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: end;
+}
+
+/**********************************/
+.wall {
+    width: 100px;
+    height: 60px;
+    border: 1px solid black;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.pixel {
+    width: 10px;
+    height: 10px;
+    background: url("assets/wall.png");
+    background-size: cover;
+    visibility: hidden;
+}
+
+.existsPixel {
+    visibility: visible;
+}
+
+.empty {
+    grid-row: 4/7;
+    grid-column: 4/8;
+}
+
+/************************************/
+#blur-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(2px);
+    z-index: -1;
+}
+
+/**********************************/
+.enemy {
+    width: clamp(22px, 5vw, 40px);
+    aspect-ratio: 8 / 5;
+    height: auto;
+    background-image: url('assets/enemy-1.png');
+    background-size: cover;
+    visibility: hidden;
+}
+
+.existsEnemy {
+    visibility: visible;
+}
+
+#enemysDiv {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: repeat(8, 40px);
+    justify-items: center;
+}
+
+/***********************/
+.lives {
+    height: 30px;
+    width: 40px;
+}
+
+
+/**********************/
+.icons {
+    position: absolute;
+    color: blanchedalmond;
+    height: 32px;
+    width: 32px;
+    cursor: pointer;
+}
+
+#ship {
+    position: absolute;
+    width: clamp(34px, 7vw, 50px);
+    aspect-ratio: 1;
+    height: auto;
+    background-image: url('assets/roket.png');
+    background-size: cover;
+}
+
+.bullets {
+    width: 20px;
+    height: 30px;
+    border-radius: 50%;
+    position: absolute;
+    background-size: cover;
+}
+
+.Xbullets {
+    background-image: url("assets/a.png");
+}
+
+.Ybullets {
+    background-image: url("assets/22.png");
+}
+
+
+
+
+
+
+#boardFooter {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+
+
+
+#textAnimation {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    padding-top: 100px;
+    font-size: 25px;
+}
+
+#cursor {
+    font-weight: bold;
+}
+
+#menu {
+    height: 300px;
+    width: 300px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 24px 0 rgba(60, 140, 255, 0.2);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+#story {
+    height: 700px;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.32);
+    box-shadow: 0 5px 24px 0 rgba(60, 140, 255, 0.2);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+.btn {
+    font-size: 30px;
+    padding: 12px 24px;
+    min-width: 180px;
+    border: 1px solid rgba(116, 178, 255, 0.58);
+    border-radius: 10px;
+    background-color: rgba(9, 19, 37, 0.42);
+    font-family: 'Saira Stencil', sans-serif;
+    color: white;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    appearance: none;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+#story>p {
+    font-size: 200%;
+    line-height: 1.6;
+    margin: 0;
+}
+.btn:hover {
+    border-color: rgba(140, 197, 255, 0.9);
+    background-color: rgba(16, 35, 64, 0.55);
+    box-shadow: 0 0 0 3px rgba(114, 182, 255, 0.14);
+    transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+    outline: none;
+    border-color: rgba(140, 197, 255, 0.95);
+    background-color: rgba(16, 35, 64, 0.55);
+    box-shadow: 0 0 0 3px rgba(114, 182, 255, 0.18);
+}
+
+
+
+@media (max-width: 870px) {
+    body {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    #board {
+        height: 80vh;
+        width: 90vw;
+    }
+    #story {
+        height: 80vh;
+        width: 90vw;
+    }
+
+    #menu {
+        width: 40%;
+        height: 30%;
+    }
+
+    .btn {
+        font-size: 25px;
+    }
+
+
+}

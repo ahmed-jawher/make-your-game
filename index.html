@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scpace Invaders</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="assets/logo.png" type="image/icon type">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Saira+Stencil:wght@100..900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <div id="blur-overlay"></div>
+
+    <h1>Space War</h1>
+    <div id="board">
+        <div id="story">
+            <p id="textStory">
+                Press Start
+            </p>
+            <button class="btn battlestart">Start</button>
+        </div>
+
+        <div id="boardHeader">
+            <div id="score">0000</div>
+            <div id="timer">000</div>
+            <div id="lives" style="color: red;">
+                <img class="lives" src="assets/backgd.jpg" alt="">
+                <img class="lives" src="assets/backgd.jpg" alt="">
+                <img class="lives" src="assets/backgd.jpg" alt="">
+            </div>
+            <div id="level">LEVEL 1</div>
+        </div>
+        <!-- --------------------- -->
+        <!-- ----------------------------------- -->
+        <div id="game">
+            <div id="enemysDiv"></div>
+        </div>
+        <!-- ----------------------------------- -->
+        <div id="Walls">
+
+        </div>
+        <!-- ----------------------------------- -->
+        <div id="btn">
+            <div id="pause" class="icons material-symbols-outlined">
+                pause
+            </div>
+        </div>
+    </div>
+
+    <div id="menu">
+        <button id="startCon" class="btn">Continue</button>
+        <button id="restart" class="btn">Restart</button>
+    </div>
+    </div>
+    <script type="module" src="scripts/script.js"></script>
+</body>
+
+</html>
