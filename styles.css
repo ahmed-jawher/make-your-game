@@ -1,11 +1,14 @@
+html {
+    overflow: hidden;
+}
+
 body {
     font-family: 'Saira Stencil', sans-serif;
     display: flex;
-
     flex-direction: column;
     align-items: center;
-
-    background-image: url('assets/s.webp');
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('assets/s.webp');
     background-size: cover;
     color: blanchedalmond;
     justify-content: center;
@@ -22,9 +25,20 @@ h1 {
     width: 700px;
     margin: 0 auto;
     padding: 0;
+    position: relative;
+    overflow: hidden;
     background-color: rgba(0, 0, 0, 0.48);
     border: 1px solid rgba(255, 255, 255, 0.08);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28), 0 0 18px rgba(60, 140, 255, 0.14);
+}
+
+#board.paused::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.55);
+    z-index: 1;
+    pointer-events: none;
 }
 
 #boardHeader {
@@ -87,16 +101,6 @@ h1 {
     grid-column: 4/8;
 }
 
-/************************************/
-#blur-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    backdrop-filter: blur(2px);
-    z-index: -1;
-}
 
 /**********************************/
 .enemy {

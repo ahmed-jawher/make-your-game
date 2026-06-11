@@ -39,9 +39,8 @@ export function shut() {
   const bullet = document.createElement("div");
   bullet.classList.add("bullets", "Ybullets");
   const shipRect = ship.getBoundingClientRect();
-  bullet.style.left = `${shipRect.left + 10}px`;
-  bullet.style.top = `${shipRect.top}px`;
-  bullet.style.transform = `translateY(0px)`;
+  bullet.style.left = `${shipRect.left + 10 - cords.left}px`;
+  bullet.style.top = `${shipRect.top - cords.top}px`;
   elements.board.appendChild(bullet);
   bullets.push(bullet);
 }
@@ -69,8 +68,7 @@ export function moveBullet() {
     if (tf) continue
 
     if (bulletRect.top > main.cords.top) {
-      let c = parseFloat(bullet.style.transform.split('translateY(')[1]);
-      bullet.style.transform = `translateY(${c - speed.bulletSpeed}px)`;
+      bullet.style.top = `${parseFloat(bullet.style.top) - speed.bulletSpeed}px`;
 
       document.querySelectorAll(".existsEnemy").forEach((enemy) => {
         if (outil.isColliding(bullet, enemy)) {
@@ -97,6 +95,7 @@ export function moveBullet() {
 
 /***************************move Enemys****************************/
 let xx = 0;
+var enemyInitialLeft = 0;
 export function moveEnemys() {
   if (game.isPaused || game.isGamrOver) {
     return;
@@ -109,12 +108,16 @@ export function moveEnemys() {
   }
 
   xx += speed.enemySpeed;
-  elements.enemysDiv.style.transform = `translateX(${xx}px)`;
+  elements.enemysDiv.style.left = `${enemyInitialLeft + xx}px`;
 }
 
 export function syncTransforms() {
-  ship.style.transform = `translateX(${x}px)`;
-  elements.enemysDiv.style.transform = `translateX(${xx}px)`;
+  ship.style.transform = '';
+  shipInitialLeft = parseFloat(ship.style.left);
+  ship.style.left = `${shipInitialLeft + x}px`;
+  elements.enemysDiv.style.transform = '';
+  enemyInitialLeft = parseFloat(elements.enemysDiv.style.left);
+  elements.enemysDiv.style.left = `${enemyInitialLeft + xx}px`;
 }
 
 /***********************ship**************************/
@@ -138,6 +141,7 @@ window.addEventListener("keyup", (event) => {
 });
 
 var x = 0;
+var shipInitialLeft = 0;
 export function moveShip() {
   if (game.isPaused || game.isGamrOver) {
     return;
@@ -147,16 +151,16 @@ export function moveShip() {
     direction == "ArrowLeft" &&
     x >= ship.offsetWidth / 2 - elements.board.offsetWidth / 2
   ) {
-    ship.style.transform = ` translateX(${x}px)`;
     x -= speed.shipSpeed;
+    ship.style.left = `${shipInitialLeft + x}px`;
   }
 
   if (isMoving &&
     direction == "ArrowRight" &&
     x <= elements.board.offsetWidth / 2 - ship.offsetWidth / 2
   ) {
-    ship.style.transform = ` translateX(${x}px)`;
     x += speed.shipSpeed;
+    ship.style.left = `${shipInitialLeft + x}px`;
   }
 
 }
@@ -184,9 +188,8 @@ export function enemyShoot(t) {
 
   let cord = a.getBoundingClientRect();
 
-  b.style.left = `${cord.left + existEnemy[0].offsetWidth / 2}px`;
-  b.style.top = `${cord.top + existEnemy[0].offsetHeight}px`;
-  b.style.transform = `translateY(0px)`;
+  b.style.left = `${cord.left + existEnemy[0].offsetWidth / 2 - cords.left}px`;
+  b.style.top = `${cord.top + existEnemy[0].offsetHeight - cords.top}px`;
 
   elements.board.appendChild(b);
   enemyBullets.push(b);
@@ -214,8 +217,7 @@ export function movingEnemybullets() {
 
     let c = enemyBullets[i].getBoundingClientRect();
     if (c.top + c.height < cords.bottom) {
-      const currentY = parseFloat(enemyBullets[i].style.transform.split('translateY(')[1]);
-      enemyBullets[i].style.transform = `translateY(${currentY + speed.speedEnemyBullet}px) translateZ(0)`;
+      enemyBullets[i].style.top = `${parseFloat(enemyBullets[i].style.top) + speed.speedEnemyBullet}px`;
 
       if (outil.isColliding(enemyBullets[i], ship)) {
         enemyBullets[i].remove();

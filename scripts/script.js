@@ -34,7 +34,6 @@ export var elements = {
   enemysDiv: document.getElementById("enemysDiv"),
   board: document.getElementById("board"),
   levelDiv: document.getElementById("level"),
-  blurOverlay: document.querySelector("#blur-overlay"),
   PauseBtn: document.querySelector("#pause"),
   lives: document.querySelectorAll(".lives"),
   story: document.getElementById("story"),
@@ -70,12 +69,12 @@ function applyResponsiveLayout() {
   }
 
   elements.enemysDiv.style.width = `${Math.round(cords.width * 0.7)}px`;
-  elements.enemysDiv.style.left = `${Math.ceil(cords.left)}px`;
-  elements.enemysDiv.style.top = `${Math.round(cords.top + Math.max(60, cords.height * 0.14))}px`;
+  elements.enemysDiv.style.left = "0px";
+  elements.enemysDiv.style.top = `${Math.round(Math.max(60, cords.height * 0.14))}px`;
   elements.enemysDiv.style.gridTemplateColumns = `repeat(${game.line}, 1fr)`;
 
-  ship.style.left = `${Math.round(cords.left + cords.width / 2 - ship.offsetWidth / 2)}px`;
-  ship.style.top = `${Math.round(cords.top + cords.height - ship.offsetHeight - Math.max(20, cords.height * 0.04))}px`;
+  ship.style.left = `${Math.round(cords.width / 2 - ship.offsetWidth / 2)}px`;
+  ship.style.top = `${Math.round(cords.height - ship.offsetHeight - Math.max(20, cords.height * 0.04))}px`;
 
   Moving.syncTransforms();
 }
@@ -83,10 +82,12 @@ function applyResponsiveLayout() {
 /**********************************************/
 
 document.addEventListener("DOMContentLoaded", () => {
-  Btn.Pause()
+  game.isPaused = true;
+  game.isStoryshowed = true;
   elements.menu.style.display = "none";
   elements.story.style.zIndex = "2";
-  game.isStoryshowed = true
+  elements.PauseBtn.style.visibility = "hidden";
+  setup();
 })
 
 elements.battlestartbtn.addEventListener("click", () => {
@@ -210,8 +211,6 @@ export function setup() {
   levelUP();
   requestID.requestID = requestAnimationFrame(gameLoop);
 }
-
-setup();
 
 window.addEventListener("resize", () => {
   applyResponsiveLayout();

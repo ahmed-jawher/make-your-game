@@ -30,13 +30,13 @@ export function Restart() {
 
   elements.ScoreBar.textContent = "0000";
   elements.menu.style.display = "none";
-  elements.blurOverlay.style.zIndex = "-1";
+  elements.board.classList.remove("paused");
   main.setup()
   
 }
 export function Pause() {
   elements.menu.style.display = "flex";
-  elements.blurOverlay.style.zIndex = "1";
+  elements.board.classList.add("paused");
   if (game.isStoryshowed){
     elements.menu.style.display = "none";
     elements.story.style.zIndex = "2";
@@ -52,6 +52,5 @@ export function Continue() {
   game.isPaused = false;
   elements.PauseBtn.style.visibility = "visible";
   elements.menu.style.display = "none";
-  elements.blurOverlay.style.zIndex = "-1";
- 
+  elements.board.classList.remove("paused");
 }
